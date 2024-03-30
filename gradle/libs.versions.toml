@@ -1,0 +1,38 @@
+[versions]
+agp = "8.3.1"
+kotlin = "1.9.0"
+ksp = "1.9.0-1.0.13"
+coreKtx = "1.12.0"
+lifecycleRuntimeKtx = "2.7.0"
+activityCompose = "1.8.2"
+composeBom = "2024.03.00"
+hilt = "2.50"
+xposed = "82"
+
+[libraries]
+# Kotlin
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlin" }
+# Android
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+# Compose
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+# Dagger Hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref="hilt" }
+hilt-gradle = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref="hilt" }
+# Xposed
+xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed"}
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hiltPlugin = { id = "dagger.hilt.android.plugin", version.ref = "hilt" }
+
