@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import io.github.yuk7.miuisearchbar.ui.theme.AppTheme
 
 @Composable
-fun TopScreen(navController: NavController) {
+fun TopScreen(navController: NavController, viewModel: TopScreenViewModel) {
     TopScreenContent()
 }
 

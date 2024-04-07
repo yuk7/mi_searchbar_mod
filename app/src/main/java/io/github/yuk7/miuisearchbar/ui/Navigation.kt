@@ -1,6 +1,7 @@
 package io.github.yuk7.miuisearchbar.ui
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -19,6 +20,6 @@ fun NavController.navigateTopScreen() {
 @Composable
 fun InitializeRoutes(navHostController: NavHostController) {
     NavHost(navHostController, startDestination = Screen.TOP.name) {
-        composable(Screen.TOP.name) { TopScreen(navHostController) }
+        composable(Screen.TOP.name) { TopScreen(navHostController, hiltViewModel()) }
     }
 }
