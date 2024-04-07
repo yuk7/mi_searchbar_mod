@@ -6,8 +6,11 @@ coreKtx = "1.12.0"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
 composeBom = "2024.03.00"
+navigationCompose = "2.7.7"
 hilt = "2.50"
+hiltCompose = "1.2.0"
 xposed = "82"
+aboutLibraries = "11.1.1"
 
 [libraries]
 # Kotlin
@@ -23,16 +26,20 @@ androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltCompose" }
 # Dagger Hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref="hilt" }
 hilt-gradle = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref="hilt" }
 # Xposed
-xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed"}
+xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed" }
+# AboutLibraries
+aboutLibraries-core = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "aboutLibraries" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hiltPlugin = { id = "dagger.hilt.android.plugin", version.ref = "hilt" }
-
+aboutLibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutLibraries" }
