@@ -5,13 +5,20 @@ import android.content.Intent
 import androidx.annotation.Keep
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodReplacement
+import de.robv.android.xposed.XSharedPreferences
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
 import de.robv.android.xposed.callbacks.XC_LoadPackage
+import io.github.yuk7.miuisearchbar.model.AssistantType
+import io.github.yuk7.miuisearchbar.model.Constants
 import io.github.yuk7.miuisearchbar.model.Constants.MIUI_HOME_PACKAGE
 
 @Keep
 class AssistantHook : IXposedHookLoadPackage {
+    private val pref by lazy {
+        XSharedPreferences(Constants.APP_PACKAGE_NAME, Constants.SHARED_PREFS_NAME)
+    }
+
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam?) {
         if (lpparam?.packageName != MIUI_HOME_PACKAGE) {
             return
@@ -25,12 +32,43 @@ class AssistantHook : IXposedHookLoadPackage {
                     val context =
                         XposedHelpers.getObjectField(param.thisObject, CONTEXT_FIELD) as Context
                     runCatching {
-                        context.startActivity(
-                            Intent(Intent.ACTION_VOICE_COMMAND)
-                                .addFlags(
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        val assistantType =
+                            AssistantType.fromTypeName(pref.getString(Constants.KEY_ASSISTANT_TYPE, null) ?: AssistantType.DEFAULT.typeName)
+                        when (assistantType) {
+                            AssistantType.DEFAULT -> {
+                                XposedBridge.invokeOriginalMethod(
+                                    param.method,
+                                    param.thisObject,
+                                    param.args
                                 )
-                        )
+                            }
+                            AssistantType.OS_DEFAULT -> {
+                                context.startActivity(
+                                    Intent(Intent.ACTION_VOICE_COMMAND)
+                                        .addFlags(
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        )
+                                )
+                            }
+                            AssistantType.GOOGLE -> {
+                                context.startActivity(
+                                    Intent(Intent.ACTION_VOICE_COMMAND)
+                                        .addFlags(
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        )
+                                        .setPackage(GOOGLE_QSB_PACKAGE)
+                                )
+                            }
+                            AssistantType.GOOGLE_VOICE_SEARCH -> {
+                                context.startActivity(
+                                    Intent(Intent.ACTION_MAIN)
+                                        .addFlags(
+                                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        )
+                                        .setClassName(GOOGLE_QSB_PACKAGE, GOOGLE_VOICE_ACTIVITY)
+                                )
+                            }
+                        }
                     }.onFailure {
                         XposedBridge.invokeOriginalMethod(
                             param.method,
@@ -48,5 +86,7 @@ class AssistantHook : IXposedHookLoadPackage {
             "$MIUI_HOME_PACKAGE.launcher.SearchBarXiaoaiLayout"
         private const val XIAOAI_METHOD = "launchXiaoAi"
         private const val CONTEXT_FIELD = "mLauncher"
+        private const val GOOGLE_QSB_PACKAGE= "com.google.android.googlequicksearchbox"
+        private const val GOOGLE_VOICE_ACTIVITY = "${ GOOGLE_QSB_PACKAGE}.VoiceSearchActivity"
     }
 }
