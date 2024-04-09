@@ -1,4 +1,4 @@
-package io.github.yuk7.miuisearchbar
+package io.github.yuk7.miuisearchbar.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

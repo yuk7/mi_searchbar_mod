@@ -27,5 +27,10 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "mi searchbar mod"
+rootProject.name = "miserchbarmod"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
+include(":model")
+include(":hook")
+include(":ui")
+include(":domain")

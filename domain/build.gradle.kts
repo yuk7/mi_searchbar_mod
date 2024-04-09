@@ -1,23 +1,17 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hiltPlugin)
 }
 
 android {
-    namespace = "io.github.yuk7.miuisearchbar"
+    namespace = "io.github.yuk7.miuisearchbar.domain"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "io.github.yuk7.miuisearchbar"
-        minSdk = 29
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        minSdk = 26
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -36,19 +30,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-    implementation(projects.hook)
-    implementation(projects.ui)
-
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 }

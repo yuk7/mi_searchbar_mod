@@ -13,28 +13,5 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiSearchbarMod"
         tools:targetApi="31">
-        <meta-data
-            android:name="xposedmodule"
-            android:value="true" />
-        <meta-data
-            android:name="xposeddescription"
-            android:value="HyperOS/MIUI Launcher SearchBar Customization" />
-        <meta-data
-            android:name="xposedminversion"
-            android:value="53" />
-        <meta-data android:name="xposedscope"
-            android:resource="@array/scope" />
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MiSearchbarMod">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
-
 </manifest>
