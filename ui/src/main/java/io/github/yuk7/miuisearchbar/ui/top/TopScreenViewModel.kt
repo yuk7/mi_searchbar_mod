@@ -2,12 +2,14 @@ package io.github.yuk7.miuisearchbar.ui.top
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.topjohnwu.superuser.Shell
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.yuk7.miuisearchbar.domain.usecase.GetAssistantTypeUseCase
 import io.github.yuk7.miuisearchbar.domain.usecase.GetSearchBoxTypeUseCase
 import io.github.yuk7.miuisearchbar.domain.usecase.SetAssistantTypeUseCase
 import io.github.yuk7.miuisearchbar.domain.usecase.SetSearchBoxTypeUseCase
 import io.github.yuk7.miuisearchbar.model.AssistantType
+import io.github.yuk7.miuisearchbar.model.Constants
 import io.github.yuk7.miuisearchbar.model.SearchBoxType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -80,5 +82,9 @@ class TopScreenViewModel @Inject constructor(
         }.onFailure {
             Log.e("TopScreenViewModel", "Failed to set assistant type", it)
         }
+    }
+
+    fun rebootHomeApp() {
+        Shell.cmd("am force-stop ${Constants.MIUI_HOME_PACKAGE}").exec()
     }
 }

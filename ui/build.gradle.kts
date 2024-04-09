@@ -58,5 +58,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.navigation.compose)
 
+    implementation(libs.libsu.core)
+    implementation(libs.aboutLibraries.core)
+
     debugImplementation(libs.androidx.ui.tooling)
 }

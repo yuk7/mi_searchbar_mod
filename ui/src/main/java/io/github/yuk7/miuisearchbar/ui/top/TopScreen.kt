@@ -10,6 +10,8 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,6 +34,7 @@ import io.github.yuk7.miuisearchbar.model.AssistantType
 import io.github.yuk7.miuisearchbar.model.SearchBoxType
 import io.github.yuk7.miuisearchbar.ui.R
 import io.github.yuk7.miuisearchbar.ui.extension.nameForUi
+import io.github.yuk7.miuisearchbar.ui.navigateToLicenseListScreen
 import io.github.yuk7.miuisearchbar.ui.theme.AppTheme
 
 @Composable
@@ -38,12 +42,10 @@ fun TopScreen(navController: NavController, viewModel: TopScreenViewModel) {
     val state by viewModel.state.collectAsStateWithLifecycle(initialValue = TopScreenState.Loading)
     TopScreenContent(
         state = state,
-        onSearchBoxSelected = { searchBoxType ->
-            viewModel.setSearchBoxType(searchBoxType)
-        },
-        onAssistantSelected = { assistantType ->
-            viewModel.setAssistantType(assistantType)
-        }
+        onClickInfo = navController::navigateToLicenseListScreen,
+        onRestartHomeAppClicked = viewModel::rebootHomeApp,
+        onSearchBoxSelected = viewModel::setSearchBoxType,
+        onAssistantSelected = viewModel::setAssistantType,
     )
 }
 
@@ -51,6 +53,8 @@ fun TopScreen(navController: NavController, viewModel: TopScreenViewModel) {
 @Composable
 fun TopScreenContent(
     state: TopScreenState,
+    onClickInfo: () -> Unit,
+    onRestartHomeAppClicked: () -> Unit,
     onSearchBoxSelected: (searchBoxType: SearchBoxType) -> Unit,
     onAssistantSelected: (assistantType: AssistantType) -> Unit,
 ) {
@@ -59,6 +63,20 @@ fun TopScreenContent(
             TopAppBar(
                 title = {
                     Text(text = stringResource(id = R.string.app_name))
+                },
+                actions = {
+                    IconButton(onClick = onRestartHomeAppClicked) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_restart_alt_24),
+                            contentDescription = stringResource(id = R.string.restart_home_app)
+                        )
+                    }
+                    IconButton(onClick = onClickInfo) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_info_outline_24),
+                            contentDescription = stringResource(id = R.string.information)
+                        )
+                    }
                 }
             )
         }
@@ -72,6 +90,7 @@ fun TopScreenContent(
                 TopScreenError(
                     paddingValues = paddingValues,
                     error = state.error,
+
                 )
             }
 
@@ -198,6 +217,8 @@ fun PreviewTopScreen() {
                 listOfAssistantType = emptyList(),
                 assistantType = AssistantType.DEFAULT,
             ),
+            onClickInfo = {},
+            onRestartHomeAppClicked = {},
             onSearchBoxSelected = {},
             onAssistantSelected = {},
         )

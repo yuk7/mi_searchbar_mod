@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Mi SearchBar Mod</string>
     <string name="app_details">This module allows you to change the behavior of MIUI Home</string>
+    <string name="common_back">Back</string>
     <string name="common_type">Type</string>
     <string name="pref_search_bar_engine">Search Engine used in Search Bar</string>
     <string name="pref_voice_assistant_engine">Voice Assistant used in Search Bar</string>
@@ -13,4 +14,7 @@
     <string name="voice_assistant_engine_google_name">Google (Google Assistant)</string>
     <string name="voice_assistant_engine_google_voice_search_name">Google (Voice Search)</string>
     <string name="error_message">Something went wrong!</string>
+    <string name="restart_home_app">Restart Home App</string>
+    <string name="information">Information</string>
+    <string name="license_oss_title">Open Source Licenses</string>
 </resources>

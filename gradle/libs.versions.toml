@@ -12,6 +12,7 @@ hiltNavigationCompose = "1.2.0"
 xposed = "82"
 aboutLibraries = "11.1.1"
 appcompat = "1.6.1"
+libsu = "5.2.2"
 
 [libraries]
 # Kotlin
@@ -38,6 +39,8 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed" }
 # AboutLibraries
 aboutLibraries-core = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "aboutLibraries" }
+# LibSU
+libsu-core = { group = "com.github.topjohnwu.libsu", name = "core", version.ref = "libsu" }
 
 
 [plugins]
