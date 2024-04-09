@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mi SearchBar Mod</string>
+    <string name="app_details">This module allows you to change the behavior of MIUI Home</string>
+    <string name="common_type">Type</string>
+    <string name="pref_search_bar_engine">Search Engine used in Search Bar</string>
+    <string name="pref_voice_assistant_engine">Voice Assistant used in Search Bar</string>
+    <string name="search_box_engine_default_name">Default (Xiaomi Search)</string>
+    <string name="search_box_engine_os_default_name">Android System Default</string>
+    <string name="search_box_engine_google_name">Google</string>
+    <string name="voice_assistant_engine_default_name">Default (Mi Ai)</string>
+    <string name="voice_assistant_engine_os_default_name">Android System Default</string>
+    <string name="voice_assistant_engine_google_name">Google (Google Assistant)</string>
+    <string name="voice_assistant_engine_google_voice_search_name">Google (Voice Search)</string>
+    <string name="error_message">Something went wrong!</string>
+</resources>

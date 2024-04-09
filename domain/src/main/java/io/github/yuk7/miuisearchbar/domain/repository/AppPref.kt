@@ -14,10 +14,11 @@ interface AppPref {
     var assistantType: String
 }
 
-class AppPrefImpl(context: Context) : AppPref {
+class AppPrefImpl(private val context: Context) : AppPref {
     // In here, MAKE_WORLD_READABLE must be used to make the shared preferences readable by hooks working in other apps.
-    @SuppressLint("WorldReadableFiles")
-    private val sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, MODE_WORLD_READABLE)
+    private val sharedPreferences
+        @SuppressLint("WorldReadableFiles")
+        get() = context.getSharedPreferences(SHARED_PREFS_NAME, MODE_WORLD_READABLE)
     override var searchBoxType: String
         get() = sharedPreferences.getString(KEY_SEARCH_BOX_TYPE, SearchBoxType.DEFAULT.typeName) ?: SearchBoxType.DEFAULT.typeName
         set(value) = sharedPreferences.edit().putString(KEY_SEARCH_BOX_TYPE, value).apply()
