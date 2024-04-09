@@ -18,7 +18,7 @@ fun NavController.navigateTopScreen() {
 
 
 @Composable
-fun InitializeRoutes(navHostController: NavHostController) {
+fun AppNavigation(navHostController: NavHostController) {
     NavHost(navHostController, startDestination = Screen.TOP.name) {
         composable(Screen.TOP.name) { TopScreen(navHostController, hiltViewModel()) }
     }
