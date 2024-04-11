@@ -8,7 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import io.github.yuk7.miuisearchbar.ui.extension.urlEncodedWithoutSpace
+import io.github.yuk7.miuisearchbar.ui.extension.urlEncoded
 import io.github.yuk7.miuisearchbar.ui.license.LicenseDetailScreen
 import io.github.yuk7.miuisearchbar.ui.license.LicenseListScreen
 import io.github.yuk7.miuisearchbar.ui.top.TopScreen
@@ -28,7 +28,7 @@ fun NavController.navigateToLicenseListScreen() {
 }
 
 fun NavController.navigateToLicenseDetailScreen(title: String, body: String) {
-    navigate("${Screen.LICENSE_DETAIL.name}/${title.urlEncodedWithoutSpace}/${body.urlEncodedWithoutSpace}")
+    navigate("${Screen.LICENSE_DETAIL.name}/${title.urlEncoded}/${body.urlEncoded}")
 }
 
 
