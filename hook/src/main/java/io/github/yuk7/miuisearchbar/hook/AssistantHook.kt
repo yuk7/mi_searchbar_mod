@@ -33,7 +33,12 @@ class AssistantHook : IXposedHookLoadPackage {
                         XposedHelpers.getObjectField(param.thisObject, CONTEXT_FIELD) as Context
                     runCatching {
                         val assistantType =
-                            AssistantType.fromTypeName(pref.getString(Constants.KEY_ASSISTANT_TYPE, null) ?: AssistantType.DEFAULT.typeName)
+                            AssistantType.fromTypeName(
+                                pref.getString(
+                                    Constants.KEY_ASSISTANT_TYPE,
+                                    null
+                                ) ?: AssistantType.DEFAULT.typeName
+                            )
                         when (assistantType) {
                             AssistantType.DEFAULT -> {
                                 XposedBridge.invokeOriginalMethod(
@@ -42,6 +47,7 @@ class AssistantHook : IXposedHookLoadPackage {
                                     param.args
                                 )
                             }
+
                             AssistantType.OS_DEFAULT -> {
                                 context.startActivity(
                                     Intent(Intent.ACTION_VOICE_COMMAND)
@@ -50,6 +56,7 @@ class AssistantHook : IXposedHookLoadPackage {
                                         )
                                 )
                             }
+
                             AssistantType.GOOGLE -> {
                                 context.startActivity(
                                     Intent(Intent.ACTION_VOICE_COMMAND)
@@ -59,6 +66,7 @@ class AssistantHook : IXposedHookLoadPackage {
                                         .setPackage(GOOGLE_QSB_PACKAGE)
                                 )
                             }
+
                             AssistantType.GOOGLE_VOICE_SEARCH -> {
                                 context.startActivity(
                                     Intent(Intent.ACTION_MAIN)
@@ -86,7 +94,7 @@ class AssistantHook : IXposedHookLoadPackage {
             "$MIUI_HOME_PACKAGE.launcher.SearchBarXiaoaiLayout"
         private const val XIAOAI_METHOD = "launchXiaoAi"
         private const val CONTEXT_FIELD = "mLauncher"
-        private const val GOOGLE_QSB_PACKAGE= "com.google.android.googlequicksearchbox"
-        private const val GOOGLE_VOICE_ACTIVITY = "${ GOOGLE_QSB_PACKAGE}.VoiceSearchActivity"
+        private const val GOOGLE_QSB_PACKAGE = "com.google.android.googlequicksearchbox"
+        private const val GOOGLE_VOICE_ACTIVITY = "$GOOGLE_QSB_PACKAGE.VoiceSearchActivity"
     }
 }

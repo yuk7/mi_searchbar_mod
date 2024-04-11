@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">Mi SearchBar Mod</string>
     <string name="app_details">This module allows you to change the behavior of MIUI Home</string>
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
     <string name="common_back">Back</string>
     <string name="common_type">Type</string>
     <string name="pref_search_bar_engine">Search Engine used in Search Bar</string>
@@ -17,4 +19,6 @@
     <string name="restart_home_app">Restart Home App</string>
     <string name="information">Information</string>
     <string name="license_oss_title">Open Source Licenses</string>
+    <string name="home_restart_dialog_title">Restart Home App</string>
+    <string name="home_restart_dialog_message">This will restart the Home app.\nRequires root privileges.\nDo you want to continue?</string>
 </resources>

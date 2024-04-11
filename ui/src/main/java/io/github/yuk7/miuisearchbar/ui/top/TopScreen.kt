@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -15,6 +16,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -58,6 +60,40 @@ fun TopScreenContent(
     onSearchBoxSelected: (searchBoxType: SearchBoxType) -> Unit,
     onAssistantSelected: (assistantType: AssistantType) -> Unit,
 ) {
+    var restartDialogShown by remember { mutableStateOf(false) }
+    if (restartDialogShown) {
+        AlertDialog(
+            onDismissRequest = {
+                restartDialogShown = false
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        onRestartHomeAppClicked()
+                        restartDialogShown = false
+                    }
+                ) {
+                    Text(stringResource(id = R.string.common_ok))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        restartDialogShown = false
+                    }
+                ) {
+                    Text(stringResource(id = R.string.common_cancel))
+                }
+            },
+            title = {
+                Text(stringResource(id = R.string.home_restart_dialog_title))
+            },
+            text = {
+                Text(stringResource(id = R.string.home_restart_dialog_message))
+            }
+        )
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -65,7 +101,7 @@ fun TopScreenContent(
                     Text(text = stringResource(id = R.string.app_name))
                 },
                 actions = {
-                    IconButton(onClick = onRestartHomeAppClicked) {
+                    IconButton(onClick = { restartDialogShown = true }) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_restart_alt_24),
                             contentDescription = stringResource(id = R.string.restart_home_app)
@@ -91,7 +127,7 @@ fun TopScreenContent(
                     paddingValues = paddingValues,
                     error = state.error,
 
-                )
+                    )
             }
 
             is TopScreenState.Loaded -> {
