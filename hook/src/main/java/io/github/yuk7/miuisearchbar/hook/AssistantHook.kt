@@ -5,20 +5,17 @@ import android.content.Intent
 import androidx.annotation.Keep
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodReplacement
-import de.robv.android.xposed.XSharedPreferences
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
 import de.robv.android.xposed.callbacks.XC_LoadPackage
+import io.github.yuk7.miuisearchbar.hook.Constants.GOOGLE_QSB_PACKAGE
+import io.github.yuk7.miuisearchbar.hook.Constants.GOOGLE_VOICE_ACTIVITY
+import io.github.yuk7.miuisearchbar.hook.utils.PreferenceUtils
 import io.github.yuk7.miuisearchbar.model.AssistantType
-import io.github.yuk7.miuisearchbar.model.Constants
 import io.github.yuk7.miuisearchbar.model.Constants.MIUI_HOME_PACKAGE
 
 @Keep
 class AssistantHook : IXposedHookLoadPackage {
-    private val pref by lazy {
-        XSharedPreferences(Constants.APP_PACKAGE_NAME, Constants.SHARED_PREFS_NAME)
-    }
-
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam?) {
         if (lpparam?.packageName != MIUI_HOME_PACKAGE) {
             return
@@ -32,14 +29,7 @@ class AssistantHook : IXposedHookLoadPackage {
                     val context =
                         XposedHelpers.getObjectField(param.thisObject, CONTEXT_FIELD) as Context
                     runCatching {
-                        val assistantType =
-                            AssistantType.fromTypeName(
-                                pref.getString(
-                                    Constants.KEY_ASSISTANT_TYPE,
-                                    null
-                                ) ?: AssistantType.DEFAULT.typeName
-                            )
-                        when (assistantType) {
+                        when (PreferenceUtils().getAssistantType()) {
                             AssistantType.DEFAULT -> {
                                 XposedBridge.invokeOriginalMethod(
                                     param.method,
@@ -94,7 +84,5 @@ class AssistantHook : IXposedHookLoadPackage {
             "$MIUI_HOME_PACKAGE.launcher.SearchBarXiaoaiLayout"
         private const val XIAOAI_METHOD = "launchXiaoAi"
         private const val CONTEXT_FIELD = "mLauncher"
-        private const val GOOGLE_QSB_PACKAGE = "com.google.android.googlequicksearchbox"
-        private const val GOOGLE_VOICE_ACTIVITY = "$GOOGLE_QSB_PACKAGE.VoiceSearchActivity"
     }
 }
