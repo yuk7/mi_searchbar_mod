@@ -7,7 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.yuk7.miuisearchbar.domain.repository.AppPref
-import io.github.yuk7.miuisearchbar.domain.repository.AppPrefImpl
+import io.github.yuk7.miuisearchbar.domain.repository.AppPrefWithoutHooks
 import javax.inject.Singleton
 
 @Module
@@ -15,5 +15,5 @@ import javax.inject.Singleton
 internal object InfraModule {
     @Provides
     @Singleton
-    fun provideAppPref(@ApplicationContext context: Context): AppPref = AppPrefImpl(context)
+    fun provideAppPrefWithoutHooks(@ApplicationContext context: Context): AppPref = AppPrefWithoutHooks(context)
 }

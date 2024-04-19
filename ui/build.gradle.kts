@@ -22,6 +22,11 @@ android {
                 "proguard-rules.pro"
             )
         }
+        flavorDimensions.add("hooks")
+        productFlavors {
+            create("withouthooks")
+            create("product")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
