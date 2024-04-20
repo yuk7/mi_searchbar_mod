@@ -127,8 +127,7 @@ fun TopScreenContent(
                 TopScreenError(
                     paddingValues = paddingValues,
                     error = state.error,
-
-                    )
+                )
             }
 
             is TopScreenState.Loaded -> {

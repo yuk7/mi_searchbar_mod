@@ -91,7 +91,7 @@ fun InfoScreenContent(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 30.dp),
+                        .padding(vertical = 35.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
