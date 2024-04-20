@@ -6,6 +6,7 @@
     <string name="common_cancel">Cancel</string>
     <string name="common_back">Back</string>
     <string name="common_type">Type</string>
+    <string name="common_next">Next</string>
     <string name="pref_search_bar_engine">Search Engine used in Search Bar</string>
     <string name="pref_voice_assistant_engine">Voice Assistant used in Search Bar</string>
     <string name="search_box_engine_default_name">Default (Xiaomi Search)</string>
@@ -18,6 +19,11 @@
     <string name="error_message">Something went wrong!</string>
     <string name="restart_home_app">Restart Home App</string>
     <string name="information">Information</string>
+    <string name="version">Version</string>
+    <string name="author">Author</string>
+    <string name="author_name">yuk7</string>
+    <string name="github">GitHub</string>
+    <string name="github_url">https://github.com/yuk7/mi_searchbar_mod</string>
     <string name="license_oss_title">Open Source Licenses</string>
     <string name="home_restart_dialog_title">Restart Home App</string>
     <string name="home_restart_dialog_message">This will restart the Home app.\nRequires root privileges.\nDo you want to continue?</string>

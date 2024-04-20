@@ -36,6 +36,7 @@ import io.github.yuk7.miuisearchbar.model.AssistantType
 import io.github.yuk7.miuisearchbar.model.SearchBoxType
 import io.github.yuk7.miuisearchbar.ui.R
 import io.github.yuk7.miuisearchbar.ui.extension.nameForUi
+import io.github.yuk7.miuisearchbar.ui.navigateToInfoScreen
 import io.github.yuk7.miuisearchbar.ui.navigateToLicenseListScreen
 import io.github.yuk7.miuisearchbar.ui.theme.AppTheme
 
@@ -44,7 +45,7 @@ fun TopScreen(navController: NavController, viewModel: TopScreenViewModel) {
     val state by viewModel.state.collectAsStateWithLifecycle(initialValue = TopScreenState.Loading)
     TopScreenContent(
         state = state,
-        onClickInfo = navController::navigateToLicenseListScreen,
+        onClickInfo = navController::navigateToInfoScreen,
         onRestartHomeAppClicked = viewModel::rebootHomeApp,
         onSearchBoxSelected = viewModel::setSearchBoxType,
         onAssistantSelected = viewModel::setAssistantType,

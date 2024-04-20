@@ -41,6 +41,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        buildConfig = true
+    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -52,6 +55,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core)
     implementation(projects.hook)
     implementation(projects.ui)
 

@@ -30,6 +30,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "miserchbarmod"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+include(":core")
 include(":app")
 include(":model")
 include(":hook")
