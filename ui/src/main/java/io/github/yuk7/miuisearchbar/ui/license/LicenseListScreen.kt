@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -80,13 +81,11 @@ fun LicenseListScreenContent(
             contentPadding = PaddingValues(
                 top = paddingValues.calculateTopPadding() + 10.dp,
                 bottom = paddingValues.calculateBottomPadding() + 10.dp,
-                start = 20.dp,
-                end = 20.dp,
             ),
             verticalArrangement = Arrangement.spacedBy(5.dp),
         ) {
             items(libraries) { library ->
-                LicenseListItem(
+                ListItem(
                     modifier = Modifier.clickable {
                         onClickLibrary(
                             library.name,
@@ -98,29 +97,16 @@ fun LicenseListScreenContent(
                                     "${library.licenses.firstOrNull()?.licenseContent}"
                         )
                     },
-                    title = library.name
+                    headlineContent = { Text(text = library.name) },
+                    trailingContent = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_navigate_next_24),
+                            contentDescription = stringResource(id = R.string.common_next)
+                        )
+                    },
                 )
             }
         }
-    }
-}
-
-@Composable
-fun LicenseListItem(modifier: Modifier = Modifier, title: String) {
-    OutlinedCard(modifier.fillMaxWidth()) {
-        Text(
-            modifier = Modifier.padding(horizontal = 10.dp, vertical = 15.dp),
-            text = title,
-            fontSize = 22.sp
-        )
-    }
-}
-
-@Preview
-@Composable
-fun LicenseItemPreview() {
-    AppTheme {
-        LicenseListItem(title = "Library Name")
     }
 }
 

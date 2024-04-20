@@ -114,6 +114,21 @@ fun InfoScreenContent(
                     title = stringResource(id = R.string.author),
                     detail = stringResource(id = R.string.author_name)
                 )
+                InfoScreenCardItem(
+                    title = stringResource(id = R.string.module_working_status),
+                    detail = stringResource(
+                        id = if (state.frameworkVersion != null)
+                            R.string.module_is_enabled
+                        else
+                            R.string.module_is_failed
+                    )
+                )
+                if (state.frameworkVersion != null) {
+                    InfoScreenCardItem(
+                        title = stringResource(id = R.string.framework_api_version),
+                        detail = state.frameworkVersion.toString()
+                    )
+                }
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 10.dp),
                 )
@@ -172,7 +187,7 @@ fun InfoScreenCardItem(
 fun PreviewInfoScreen() {
     AppTheme {
         InfoScreenContent(
-            state = InfoScreenState("versionName"),
+            state = InfoScreenState("versionName", null),
             onClickBack = {},
             onClickGitHub = {},
             onClickLicenses = {},

@@ -20,6 +20,10 @@
     <string name="restart_home_app">Restart Home App</string>
     <string name="information">Information</string>
     <string name="version">Version</string>
+    <string name="module_working_status">Module Working Status</string>
+    <string name="module_is_enabled">Module is Enabled</string>
+    <string name="module_is_failed">Failed to get module status</string>
+    <string name="framework_api_version">Framework API Version</string>
     <string name="author">Author</string>
     <string name="author_name">yuk7</string>
     <string name="github">GitHub</string>
