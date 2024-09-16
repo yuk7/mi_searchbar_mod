@@ -2,6 +2,7 @@ package io.github.yuk7.miuisearchbar.hook
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import androidx.annotation.Keep
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodReplacement
@@ -23,9 +24,8 @@ class SearchBoxHook : IXposedHookLoadPackage {
         XposedHelpers.findAndHookMethod(
             SEARCHBAR_DESKTOP_LAYOUT_CLASS,
             lpparam.classLoader,
-            SEARCH_METHOD,
-            java.lang.String::class.java,
-            java.lang.String::class.java,
+            ONCLICK_METHOD,
+            View::class.java,
             object : XC_MethodReplacement() {
                 override fun replaceHookedMethod(param: MethodHookParam) {
                     val context =
@@ -74,7 +74,7 @@ class SearchBoxHook : IXposedHookLoadPackage {
     companion object {
         private const val SEARCHBAR_DESKTOP_LAYOUT_CLASS =
             "$MIUI_HOME_PACKAGE.launcher.SearchBarDesktopLayout"
-        private const val SEARCH_METHOD = "launchGlobalSearch"
+        private const val ONCLICK_METHOD = "onClick"
         private const val CONTEXT_FIELD = "mLauncher"
     }
 }
